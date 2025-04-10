@@ -1,23 +1,29 @@
-import { useState } from "react";
-import { renderLog } from "../utils";
+import { memo, useState } from "react";
+import { generateItems, renderLog } from "../utils";
 import { useTheme } from "../contexts";
 
 // 타입 정의
-interface Item {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-}
+// interface Item {
+//   id: number;
+//   name: string;
+//   category: string;
+//   price: number;
+// }
 
 // ItemList 컴포넌트
-export const ItemList: React.FC<{
-  items: Item[];
-  onAddItemsClick: () => void;
-}> = ({ items, onAddItemsClick }) => {
+export const ItemList: React.FC = memo(() => {
   renderLog("ItemList rendered");
+  const [items, setItems] = useState(generateItems(1000));
   const [filter, setFilter] = useState("");
   const { theme } = useTheme();
+
+  // 관심사 분리하기 위해서 옮겨옴
+  const addItems = () => {
+    setItems((prevItems) => [
+      ...prevItems,
+      ...generateItems(1000, prevItems.length),
+    ]);
+  };
 
   const filteredItems = items.filter(
     (item) =>
@@ -37,7 +43,7 @@ export const ItemList: React.FC<{
           <button
             type="button"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs"
-            onClick={onAddItemsClick}
+            onClick={addItems}
           >
             대량추가
           </button>
@@ -67,4 +73,4 @@ export const ItemList: React.FC<{
       </ul>
     </div>
   );
-};
+});
