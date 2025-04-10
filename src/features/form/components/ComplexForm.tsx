@@ -6,12 +6,8 @@ import { useComplexForm } from "../hooks";
 export const ComplexForm: React.FC = memo(() => {
   renderLog("ComplexForm rendered");
 
-  const {
-    formData,
-    handleSubmit,
-    handleInputChange,
-    handlePreferenceChange,
-  } = useComplexForm();
+  const { formData, handleSubmit, handleInputChange, handlePreferenceChange } =
+    useComplexForm();
 
   return (
     <div className="mt-8">
