@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { generateItems, renderLog } from "../utils";
 import { useTheme } from "../contexts";
 
@@ -13,17 +13,19 @@ import { useTheme } from "../contexts";
 // ItemList 컴포넌트
 export const ItemList: React.FC = memo(() => {
   renderLog("ItemList rendered");
-  const [items, setItems] = useState(generateItems(1000));
+  const initialItems = useMemo(() => generateItems(1000), []);
+  const [items, setItems] = useState(initialItems);
   const [filter, setFilter] = useState("");
   const { theme } = useTheme();
 
   // 관심사 분리하기 위해서 옮겨옴
-  const addItems = () => {
+  // 이거 useCallback해도 안되는 이유는 위에 useTheme 훅을 내부에서 쓰고있어서 컴포넌트가 다시 렌더링 되버림 
+  const addItems = useCallback(() => {
     setItems((prevItems) => [
       ...prevItems,
       ...generateItems(1000, prevItems.length),
     ]);
-  };
+  }, [setItems]);
 
   const filteredItems = items.filter(
     (item) =>
@@ -32,7 +34,6 @@ export const ItemList: React.FC = memo(() => {
   );
 
   const totalPrice = filteredItems.reduce((sum, item) => sum + item.price, 0);
-
   const averagePrice = Math.round(totalPrice / filteredItems.length) || 0;
 
   return (
