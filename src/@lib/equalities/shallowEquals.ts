@@ -1,5 +1,5 @@
 // Record 타입: 키-값 쌍을 가진 객체 타입을 정의할 때 사용
-export function shallowEquals<T extends Record<string, unknown>>(
+export function shallowEquals<T>(
   objA: T,
   objB: T,
 ): boolean {

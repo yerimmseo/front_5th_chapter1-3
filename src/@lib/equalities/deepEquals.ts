@@ -1,4 +1,4 @@
-export function deepEquals<T extends Record<string, unknown>>(
+export function deepEquals<T>(
   objA: T,
   objB: T,
 ): boolean {
