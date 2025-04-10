@@ -1,6 +1,7 @@
 import { memo } from "react";
-import { renderLog } from "../utils";
-import { useTheme, useUser } from "../contexts";
+import { renderLog } from "../../../utils";
+import { useTheme } from "../../theme";
+import { useUser } from "../hooks";
 
 // Header 컴포넌트
 export const Header: React.FC = memo(() => {

@@ -1,4 +1,7 @@
-export function deepEquals<T>(objA: T, objB: T): boolean {
+export function deepEquals<T extends Record<string, unknown>>(
+  objA: T,
+  objB: T,
+): boolean {
   if (objA === objB) {
     return true;
   }
@@ -23,13 +26,7 @@ export function deepEquals<T>(objA: T, objB: T): boolean {
     }
 
     // 배열 안의 배열 비교
-    for (let i = 0; i < objA.length; i++) {
-      if (!deepEquals(objA[i], objB[i])) {
-        return false;
-      }
-    }
-
-    return true;
+    return objA.every((item, index) => deepEquals(item, objB[index]));
   }
 
   const keysA = Object.keys(objA);
@@ -39,15 +36,10 @@ export function deepEquals<T>(objA: T, objB: T): boolean {
     return false;
   }
 
-  for (const key of keysA) {
-    if (!Object.prototype.hasOwnProperty.call(objB, key)) {
-      return false;
-    }
-
-    if (!deepEquals(objA[key], objB[key])) {
-      return false;
-    }
-  }
-
-  return true;
+  // 객체 속성 비교
+  return keysA.every(
+    (key) =>
+      Object.prototype.hasOwnProperty.call(objB, key) &&
+      deepEquals(objA[key], objB[key]),
+  );
 }

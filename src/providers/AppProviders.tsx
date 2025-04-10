@@ -1,7 +1,5 @@
 import React, { ReactNode } from "react";
-import { ThemeProvider } from "./ThemeProvider";
-import { NotificationProvider } from "./NotificationProvider";
-import { UserProvider } from "./UserProvider";
+import { NotificationProvider, ThemeProvider, UserProvider } from "../core";
 
 export const AppProviders: React.FC<{ children: ReactNode }> = ({
   children,

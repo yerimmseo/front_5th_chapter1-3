@@ -1,7 +1,5 @@
 import { memo, ReactNode } from "react";
-import { useTheme } from "../contexts";
-import { Header } from "./Header";
-import { NotificationSystem } from "./NotificationSystem";
+import { Header, NotificationSystem, useTheme } from "../../../core";
 
 export const Layout: React.FC<{ children: ReactNode }> = memo(
   ({ children }) => {

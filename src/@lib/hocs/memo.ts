@@ -1,5 +1,5 @@
-import { shallowEquals } from "../equalities";
 import React, { ComponentType } from "react";
+import { shallowEquals } from "../equalities";
 import { useRef } from "../hooks";
 
 export function memo<P extends object>(
@@ -7,7 +7,7 @@ export function memo<P extends object>(
   _equals = shallowEquals,
 ) {
   return function (props: P) {
-    const prevProps = useRef(null);
+    const prevProps = useRef<P | null>(null);
 
     if (prevProps.current && _equals(prevProps.current, props)) {
       return null; // props 같으면 렌더링 하지 않음

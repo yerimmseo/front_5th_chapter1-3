@@ -1,6 +1,6 @@
 import { memo } from "react";
-import { renderLog } from "../utils";
-import { useNotification } from "../contexts";
+import { renderLog } from "../../../utils";
+import { useNotification } from "../hooks";
 
 // NotificationSystem 컴포넌트
 export const NotificationSystem: React.FC = memo(() => {
