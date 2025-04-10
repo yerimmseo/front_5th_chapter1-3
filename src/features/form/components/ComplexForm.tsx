@@ -29,7 +29,7 @@ export const ComplexForm: React.FC = memo(() => {
         [name]: name === "age" ? parseInt(value) || 0 : value,
       }));
     },
-    [setFormData],
+    [],
   );
 
   const handlePreferenceChange = useCallback(
@@ -41,7 +41,7 @@ export const ComplexForm: React.FC = memo(() => {
           : [...prev.preferences, preference],
       }));
     },
-    [setFormData],
+    [],
   );
 
   return (

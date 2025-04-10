@@ -10,7 +10,7 @@ export const useItems = () => {
       ...prevItems,
       ...generateItems(1000, prevItems.length),
     ]);
-  }, [setItems]);
+  }, []);
 
   return { items, addItems };
 };

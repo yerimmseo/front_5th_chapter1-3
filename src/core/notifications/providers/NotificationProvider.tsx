@@ -14,7 +14,7 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
       };
       setNotifications((prev) => [...prev, newNotification]);
     },
-    [setNotifications],
+    [],
   );
 
   const removeNotification = useCallback(
@@ -23,7 +23,7 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
         prev.filter((notification) => notification.id !== id),
       );
     },
-    [setNotifications],
+    [],
   );
 
   const value = useMemo(
