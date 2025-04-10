@@ -1,48 +1,17 @@
-import { memo, useCallback, useState } from "react";
+import { memo } from "react";
 import { renderLog } from "../../../utils";
-import { useNotification } from "../../../core";
+import { useComplexForm } from "../hooks";
 
 // ComplexForm 컴포넌트
 export const ComplexForm: React.FC = memo(() => {
   renderLog("ComplexForm rendered");
-  const { addNotification } = useNotification();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    age: 0,
-    preferences: [] as string[],
-  });
 
-  const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      addNotification("폼이 성공적으로 제출되었습니다", "success");
-    },
-    [addNotification],
-  );
-
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: name === "age" ? parseInt(value) || 0 : value,
-      }));
-    },
-    [],
-  );
-
-  const handlePreferenceChange = useCallback(
-    (preference: string) => {
-      setFormData((prev) => ({
-        ...prev,
-        preferences: prev.preferences.includes(preference)
-          ? prev.preferences.filter((p) => p !== preference)
-          : [...prev.preferences, preference],
-      }));
-    },
-    [],
-  );
+  const {
+    formData,
+    handleSubmit,
+    handleInputChange,
+    handlePreferenceChange,
+  } = useComplexForm();
 
   return (
     <div className="mt-8">

@@ -1,7 +1,4 @@
-export function deepEquals<T>(
-  objA: T,
-  objB: T,
-): boolean {
+export function deepEquals<T>(objA: T, objB: T): boolean {
   if (objA === objB) {
     return true;
   }

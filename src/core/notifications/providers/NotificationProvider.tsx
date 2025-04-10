@@ -17,14 +17,11 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
     [],
   );
 
-  const removeNotification = useCallback(
-    (id: number) => {
-      setNotifications((prev) =>
-        prev.filter((notification) => notification.id !== id),
-      );
-    },
-    [],
-  );
+  const removeNotification = useCallback((id: number) => {
+    setNotifications((prev) =>
+      prev.filter((notification) => notification.id !== id),
+    );
+  }, []);
 
   const value = useMemo(
     () => ({
